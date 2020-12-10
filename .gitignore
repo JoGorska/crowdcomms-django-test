@@ -1,0 +1,126 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+build/
+dist/
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+mable_api_venv/
+venv/
+venv-legacy/
+
+# Espresso (IDE)
+mable_api.esproj/
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+*.log.*
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Sublime
+*.sublime-project
+*.sublime-workspace
+
+# Project Local Settings
+local_settings.py
+
+# PyCharm
+.idea/
+
+# Node Modules
+**/node_modules
+
+# Database
+db.sqlite3
+
+# Static Files
+static/static_root
+log.txt
+test_log.txt
+
+mable_api/settings/dev.py
+
+# Celery stuff
+celerybeat.pid
+celerybeat-schedule.*
+celerybeat-schedule
+
+.vagrant/
+dump.rdb
+.env
+local.env
+test.env
+
+!docker/django/pycharm-debug-py3k.egg
+
+app_images/
+venv-legacy/
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+
+# terraform
+**/.terraform
+*.tfstate
+*.tfstate.*
+
+keys
+*.xlsx
+*.ics
+*.tar.*
+*.tar
+*.backup
+media
+
+tools/feed-images/
+tools/qa-downloads/
+tools/survey-downloads/
+
+version.txt
