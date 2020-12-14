@@ -13,8 +13,10 @@ Please _clone_ (don't fork) this repository, complete the test and then upload t
 project however is most comfortable for you ( virtualenv / docker etc. ). Regardless, you'll need python3.6 to run this code.
 
 ```bash
-git clone git@github.com:<YourUsername>/crowdcomms-django-test.git
+git clone git@github.com:crowdcomms/crowdcomms-django-test.git
 cd crowdcomms-django-test
+git remote remove origin
+git remote add origin <Your Repository>
 pipenv shell
 pipenv install
 python manage.py test
