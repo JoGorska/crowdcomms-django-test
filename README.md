@@ -9,8 +9,7 @@ Instructions:
 This repository contains a simple Django Rest Framework API project with a couple of apps and models. We've added some
 basic views and tests. Essentially we'd like you to fix the project so that the whole test suite passes.
 
-Please fork this repository to your own account, and supply your solution as a pull request with comments detailing how
-you went about solving the problem. The instructions below are for use with pipenv, but of course you can setup the 
+Please _clone_ (don't fork) this repository, complete the test and then upload to a public repository on github and send us the link. The instructions below are for use with pipenv, but of course you can setup the 
 project however is most comfortable for you ( virtualenv / docker etc. ). Regardless, you'll need python3.6 to run this code.
 
 ```bash
