@@ -4,11 +4,11 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-djangorestframework = "==3.8.2"
+djangorestframework = "<4.0"
 pytz = "==2018.5"
-Django = "==2.1.1"
+Django = "<3.0"
 
 [dev-packages]
 
 [requires]
-python_version = "3.6"
+python_version = "3.9"
