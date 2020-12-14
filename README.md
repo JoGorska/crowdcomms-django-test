@@ -3,6 +3,12 @@ Hello
 
 Thanks for taking the time to complete this code test, we really appreciate it!
 
+Introduction
+----
+
+Welcome to the bunnies API! Bunnies live in rabbit holes, and as a user you can manage rabbit holes and the bunnies that live in them. We also love to capture analytics about our users so we do some basic tracking too.
+
+
 Instructions:
 ----
 
