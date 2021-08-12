@@ -1,0 +1,9 @@
+version: '2'
+
+services: 
+  project:
+    image: crowdcomms/django-test:latest
+    build: .
+    volumes: 
+      - .:/tmp/myapp
+      
