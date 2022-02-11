@@ -1,10 +1,13 @@
 from datetime import datetime
+from django.shortcuts import get_object_or_404
 
 from django.utils import timezone
 
 # Create your views here.
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.contrib.auth.models import User
+from .models import UserVisit
 
 
 class HelloWorld(APIView):
@@ -21,5 +24,20 @@ class HelloWorld(APIView):
             'all_visitors': 0,
             'all_visits': 0,
         }
+        username = request.GET.get("user")
+        user_object = get_object_or_404(User, username="bob")
+        user_visit = UserVisit.objects.create(
+            user = user_object,
+
+        )
+
         return Response(data)
+    
+            
+
+    
+
+        
+
+
 
