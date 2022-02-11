@@ -28,10 +28,23 @@ class HelloWorld(APIView):
         user_from_request = request.user
         user_id = user_from_request.id
         user_object = get_object_or_404(User, id=user_id)
-        user_visit = UserVisit.objects.create(
-            user = user_object,
+        all_visits = UserVisit.objects.all()
+        users_already_in = []
+        # checks if user already has UserVisit
+        for visit in all_visits:
+            users_already_in.append(visit.user)
+        if user_object in users_already_in:
+            # updates the UserVisit object if user already has an object
+            user_visit_object = get_object_or_404(UserVisit, user=user_object)
+            current_visits = user_visit_object.visits 
+            new_visits = current_visits + 1
+            
+        else:
+            # creates new UserVisit object if user doesn't have this object yet
+            user_visit = UserVisit.objects.create(
+                user = user_object,
 
-        )
+            )
 
         return Response(data)
     
