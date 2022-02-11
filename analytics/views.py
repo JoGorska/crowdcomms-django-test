@@ -24,8 +24,10 @@ class HelloWorld(APIView):
             'all_visitors': 0,
             'all_visits': 0,
         }
-        username = request.GET.get("user")
-        user_object = get_object_or_404(User, username="bob")
+        
+        user_from_request = request.user
+        user_id = user_from_request.id
+        user_object = get_object_or_404(User, id=user_id)
         user_visit = UserVisit.objects.create(
             user = user_object,
 
