@@ -19,7 +19,7 @@ class HelloWorld(APIView):
     def get(self, request, format=None):
         data = {
             'version': 1.0,
-            'time': timezone.now(),
+            'time': datetime.now(),
             'recent_visitors': 0,
             'all_visitors': 0,
             'all_visits': 0,
@@ -38,6 +38,11 @@ class HelloWorld(APIView):
             user_visit_object = get_object_or_404(UserVisit, user=user_object)
             current_visits = user_visit_object.visits 
             new_visits = current_visits + 1
+            user_visit_object.visits = new_visits
+            user_visit_object.last_seen = datetime.now()
+            user_visit_object.save(
+                update_fields=["last_seen", "visits",]
+            )
             
         else:
             # creates new UserVisit object if user doesn't have this object yet
