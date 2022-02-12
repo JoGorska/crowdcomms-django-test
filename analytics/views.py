@@ -1,5 +1,6 @@
 from datetime import datetime
 from django.shortcuts import get_object_or_404
+from django.http import Http404
 
 from django.utils import timezone
 
@@ -21,8 +22,15 @@ class HelloWorld(APIView):
         
         user_from_request = request.user
         user_id = user_from_request.id
-        user_object = get_object_or_404(User, id=user_id)
+        # user_object = get_object_or_404(User, id=user_id)
+        def get_user_object(user_id):
+            try:
+                return User.objects.get(id=user_id)
+            except:
+                raise Http404
+        user_object = get_user_object(user_id)
         all_visits_objects = UserVisit.objects.all()
+
         users_already_in = []
         # checks if user already has UserVisit
         for visit in all_visits_objects:
@@ -51,7 +59,7 @@ class HelloWorld(APIView):
         
         data = {
             'version': 1.0,
-            'time': datetime.now(),
+            'time': datetime.utcnow(),
             'recent_visitors': UserVisit.objects.count(),
             'all_visitors': User.objects.count(),
             'all_visits': all_visits,
