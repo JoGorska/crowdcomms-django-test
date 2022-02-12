@@ -11,7 +11,7 @@ class RabbitHole(models.Model):
     location = models.CharField(max_length=64, unique=True)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     bunnies_limit = models.PositiveIntegerField(default=5)
-
+    bunny_count = models.PositiveIntegerField(default=0)
 
 class Bunny(models.Model):
     '''

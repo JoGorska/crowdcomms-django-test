@@ -138,7 +138,7 @@ class RabbitHolesTests(APITestCase):
 
         self.client.login(username='user', password='rabbits')
         response = self.client.get(f'/bunnies/{bunny.id}/')
-        # self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         self.assertEqual(set(names), set(response.data['family_members']))
         assert other_bunny.name not in response.data['family_members']
 
