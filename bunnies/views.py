@@ -1,4 +1,6 @@
 from rest_framework import viewsets
+from rest_framework.response import Response
+from rest_framework import status
 
 from django.shortcuts import get_object_or_404
 
@@ -17,6 +19,13 @@ class RabbitHoleViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         return super().create(request, *args, **kwargs)
+    
+    def delete(self, request, id, *args, **kwargs):
+        rabbit_hole = self.get_object(id)
+        print(f'DO I HAVE A RABBIT HOLE {rabbit_hole}')
+        rabbit_hole.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 
     def filter_queryset(self, *args, **kwargs):
         current_user = self.request.user
