@@ -36,21 +36,17 @@ class BunnySerializer(serializers.ModelSerializer):
     family_members = serializers.SerializerMethodField()
 
     def get_family_members(self, obj):
-        members = []
-        all_bunnies = Bunny.objects.all()
+        obj.family_members = []
         initial_data = self.get_initial()
         current_rabbithole_name = initial_data["home"]
         current_rabbit_name = initial_data["name"]
         rabbithole_object = get_object_or_404(RabbitHole, location=current_rabbithole_name)
-        rabbithole_id = rabbithole_object.id
-        members = Bunny.objects.filter(home=rabbithole_id).all()
-
-        # for bunny in all_bunnies:
-        #     if bunny.home.id == rabbithole_id:
-        #         bunny_name = bunny.name
-        #         members.append(bunny_name)
-        # members.remove(current_rabbit_name)
-        return members
+        all_bunnies = Bunny.objects.filter(home=rabbithole_object).all()
+        for bunny in all_bunnies:
+            bunny_name = bunny.name
+            obj.family_members.append(bunny_name)
+        obj.family_members.remove(current_rabbit_name)
+        return obj.family_members
 
     def validate(self, attrs):
         # if RabbitHoleSerializer.limit_bunnies_in_hole(RabbitHoleSerializer, RabbitHole):
