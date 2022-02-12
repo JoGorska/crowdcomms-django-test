@@ -15,23 +15,6 @@ class RabbitHoleSerializer(serializers.ModelSerializer):
     
     def get_bunny_count(self, obj):
         return obj.bunnies.count()
-
-    def pass_limit_bunnies_in_hole(self, obj):
-        looking_for_limit = obj.__dict__["bunnies_limit"].__dict__
-        print(f'RABBIT HOLE LIMIT {looking_for_limit}')
-
-    # current_bunny_count = self.get_bunny_count(self, obj)
-    #     # current_limit = obj.rabbithole.bunnies_limit
-    #     current_limit = 2
-    #     if current_bunny_count <= current_limit:
-    #         return True
-
-        initial_data = self.__dict__["_declared_fields"]["bunnies"].__dict__["_kwargs"]["child_relation"].queryset
-        current_bunny_count = 0
-        for bunny in initial_data:
-            current_bunny_count += 1
-        return current_bunny_count
-
     class Meta:
         model = RabbitHole
         fields = ('location', 'bunnies', 'bunny_count', 'owner')
@@ -56,8 +39,6 @@ class BunnySerializer(serializers.ModelSerializer):
         return obj.family_members
 
     def validate(self, attrs):
-        if not RabbitHoleSerializer.pass_limit_bunnies_in_hole(RabbitHoleSerializer, RabbitHole):
-            return self.context
         return attrs
 
     class Meta:
