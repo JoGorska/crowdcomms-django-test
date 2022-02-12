@@ -1,3 +1,5 @@
+from django import get_version
+from django.shortcuts import get_object_or_404
 from rest_framework import serializers
 
 from bunnies.models import Bunny, RabbitHole
@@ -14,14 +16,14 @@ class RabbitHoleSerializer(serializers.ModelSerializer):
     def get_bunny_count(self, obj):
         return obj.bunnies.count()
 
-    def limit_bunnies_in_hole(self, obj):
-        current_bunny_count = self.get_bunny_count()
-        current_hole_in_request = self.request.rabbithole
-        hole_id = current_hole_in_request.id
-        current_hole = RabbitHole.objects.filter(id=hole_id)
-        current_limit = current_hole.bunnies_limit
-        if current_bunny_count > current_limit:
-            raise serializers.ValidationError
+    # def limit_bunnies_in_hole(self, obj):
+
+    #     current_bunny_count = self.get_bunny_count(self, obj)
+    #     # current_limit = obj.rabbithole.bunnies_limit
+    #     current_limit = 2
+    #     if current_bunny_count > current_limit:
+    #         raise serializers.ValidationError('too many bunnies')
+    #     return True
 
     class Meta:
         model = RabbitHole
@@ -34,9 +36,22 @@ class BunnySerializer(serializers.ModelSerializer):
     family_members = serializers.SerializerMethodField()
 
     def get_family_members(self, obj):
-        return []
+        members = []
+        all_bunnies = Bunny.objects.all()
+        initial_data = self.get_initial()
+        current_rabbithole_name = initial_data["home"]
+        rabbithole_object = get_object_or_404(RabbitHole, location=current_rabbithole_name)
+        rabbithole_id = rabbithole_object.id
+
+        for bunny in all_bunnies:
+            if bunny.home.id == rabbithole_id:
+                bunny_name = bunny.name
+                members.append(bunny_name)
+
+        return members
 
     def validate(self, attrs):
+        # if RabbitHoleSerializer.limit_bunnies_in_hole(RabbitHoleSerializer, RabbitHole):
         return attrs
 
     class Meta:
