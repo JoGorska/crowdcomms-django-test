@@ -40,14 +40,16 @@ class BunnySerializer(serializers.ModelSerializer):
         all_bunnies = Bunny.objects.all()
         initial_data = self.get_initial()
         current_rabbithole_name = initial_data["home"]
+        current_rabbit_name = initial_data["name"]
         rabbithole_object = get_object_or_404(RabbitHole, location=current_rabbithole_name)
         rabbithole_id = rabbithole_object.id
+        members = Bunny.objects.filter(home=rabbithole_id).all()
 
-        for bunny in all_bunnies:
-            if bunny.home.id == rabbithole_id:
-                bunny_name = bunny.name
-                members.append(bunny_name)
-
+        # for bunny in all_bunnies:
+        #     if bunny.home.id == rabbithole_id:
+        #         bunny_name = bunny.name
+        #         members.append(bunny_name)
+        # members.remove(current_rabbit_name)
         return members
 
     def validate(self, attrs):
