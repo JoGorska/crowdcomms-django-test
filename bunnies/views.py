@@ -2,6 +2,7 @@ from rest_framework import viewsets
 
 # Create your views here.
 from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.models import User
 
 from bunnies.models import Bunny, RabbitHole
 from bunnies.permissions import RabbitHolePermissions
@@ -16,8 +17,14 @@ class RabbitHoleViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         return super().create(request, *args, **kwargs)
 
-    def filter_queryset(self, queryset):
-        return queryset
+    def filter_queryset(self, *args, **kwargs):
+        current_user = self.request.user
+        user_id = current_user.id
+        user_object = User.objects.get(id=user_id)
+        owns_holes = RabbitHole.objects.filter(owner=user_object).all()
+
+        return owns_holes
+
 
 
 class BunnyViewSet(viewsets.ModelViewSet):
